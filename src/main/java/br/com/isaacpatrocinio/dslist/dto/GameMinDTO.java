@@ -1,6 +1,7 @@
 package br.com.isaacpatrocinio.dslist.dto;
 
 import br.com.isaacpatrocinio.dslist.entities.Game;
+import br.com.isaacpatrocinio.dslist.projections.GameMinProjection;
 import jakarta.persistence.*;
 
 import javax.annotation.processing.Generated;
@@ -29,6 +30,14 @@ public class GameMinDTO {
         year = game.getYear();
         imgUrl = game.getImgUrl();
         shortDescription = game.getShortDescription();
+    }
+
+    public GameMinDTO(GameMinProjection projection) {
+        id = projection.getId();
+        title = projection.getTitle();
+        year = projection.getYear();
+        imgUrl = projection.getImgUrl();
+        shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {
