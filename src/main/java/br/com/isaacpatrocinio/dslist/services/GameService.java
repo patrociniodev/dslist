@@ -5,10 +5,12 @@ import br.com.isaacpatrocinio.dslist.dto.GameMinDTO;
 import br.com.isaacpatrocinio.dslist.entities.Game;
 import br.com.isaacpatrocinio.dslist.projections.GameMinProjection;
 import br.com.isaacpatrocinio.dslist.repositories.GameRepository;
+import br.com.isaacpatrocinio.dslist.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GameService {
@@ -27,8 +29,9 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public GameDTO findById(Long id) {
-        Game result = gameRepository.findById(id).get();
-        return new GameDTO(result);
+        Optional<Game> result = gameRepository.findById(id);
+        Optional<GameDTO> resultDTO = result.stream().map(obj -> new GameDTO(obj)).findAny();
+        return resultDTO.orElseThrow(ResourceNotFoundException::new);
     }
 
     @Transactional(readOnly = true)
