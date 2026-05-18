@@ -2,13 +2,12 @@ package br.com.isaacpatrocinio.dslist.controllers;
 
 import br.com.isaacpatrocinio.dslist.dto.GameListDTO;
 import br.com.isaacpatrocinio.dslist.dto.GameMinDTO;
+import br.com.isaacpatrocinio.dslist.dto.ReplacementDTO;
+import br.com.isaacpatrocinio.dslist.entities.GameList;
 import br.com.isaacpatrocinio.dslist.services.GameListService;
 import br.com.isaacpatrocinio.dslist.services.GameService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +33,11 @@ public class GameListController {
     public ResponseEntity<List<GameMinDTO>> findGamesByList(@PathVariable Long listId) {
         List<GameMinDTO> result = gameService.findByList(listId);
         return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping(value = "/{listId}/replacement")
+    public ResponseEntity<Void> move(@PathVariable Long listId, @RequestBody ReplacementDTO body) {
+        gameListService.move(listId, body.getSourceIndex(), body.getDestinationIndex());
+        return ResponseEntity.ok().build();
     }
 }
