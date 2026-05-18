@@ -29,9 +29,8 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public GameDTO findById(Long id) {
-        Optional<Game> result = gameRepository.findById(id);
-        Optional<GameDTO> resultDTO = result.stream().map(obj -> new GameDTO(obj)).findAny();
-        return resultDTO.orElseThrow(ResourceNotFoundException::new);
+        Optional<GameDTO> result = gameRepository.findById(id).map(GameDTO::new);
+        return result.orElseThrow(ResourceNotFoundException::new);
     }
 
     @Transactional(readOnly = true)
