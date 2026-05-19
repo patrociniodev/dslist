@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-DSList é uma API RESTful simples para gerenciar listas de jogos, desenvolvida durante o evento Intenvisão Java Spring da DevSuperior.
+DSList é uma API RESTful simples para gerenciar listas de jogos, desenvolvida durante o evento Intensivão Java Spring DevSuperior
 
 ## Modelo Conceitual
 <img width="824" height="290" alt="dslist-model" src="https://github.com/user-attachments/assets/0dfaddb1-617f-4a60-a013-7fb9d9db5c5d" />
